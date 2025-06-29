@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+ul {
+  list-style: none;
+}
+li {
+  display: flex;
+}
+
+.form-container {
+  background-color: antiquewhite;
+  display: flex;
+  border-radius: 7px;
+}
+.form-container input,
+.saveBtn {
+  border: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 10px;
+  outline: none;
+  height: 40px;
+}
+
+.deadline {
+  width: 15%;
+}
+.description {
+  width: 70%;
+}
+.saveBtn {
+  width: 15%;
+  cursor: pointer;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+.todo-lists {
+  margin: 0 auto;
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+  background-color: bisque;
+}
+
+.todo-list {
+  margin-top: 2rem;
+  background-color: aquamarine;
+  padding: 15px;
+  gap: 1rem;
+  align-items: center;
+}
+.todo-list .desc-title {
+  flex: 1;
+}
