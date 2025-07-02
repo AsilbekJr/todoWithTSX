@@ -1,5 +1,4 @@
 import TaskList from "./TaskList";
-import { useEffect, useState } from "react";
 
 type Task = {
   id: number;
@@ -7,40 +6,31 @@ type Task = {
   dead: number;
   complete: boolean;
 };
-
-const TaskLists: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-
-  useEffect(() => {
-    const store = localStorage.getItem("tasks");
-    if (store) {
-      try {
-        const parsed: Task[] = JSON.parse(store);
-        setTasks(parsed);
-      } catch (error) {
-        console.error("Error parsing tasks:", error);
-      }
-    }
-  }, []);
-
-  const toggleComplete = (id: number) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, complete: !task.complete } : task
-    );
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-  };
-
+interface TaskProps {
+  tasks: Task[];
+  toggleComplete: (id: number) => void;
+  onDelete: (id: number) => void;
+}
+const TaskLists: React.FC<TaskProps> = ({
+  tasks,
+  onDelete,
+  toggleComplete,
+}) => {
   return (
     <div>
       <ul className="todo-lists">
-        {tasks.map((item) => (
-          <TaskList
-            key={item.id}
-            task={item}
-            onToggle={() => toggleComplete(item.id)}
-          />
-        ))}
+        {tasks.length === 0 ? (
+          <h1>Tasklar yoq</h1>
+        ) : (
+          tasks.map((item: Task) => (
+            <TaskList
+              key={item.id}
+              task={item}
+              onDelete={() => onDelete(item.id)}
+              onToggle={() => toggleComplete(item.id)}
+            />
+          ))
+        )}
       </ul>
     </div>
   );
